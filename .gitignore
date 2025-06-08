@@ -1,0 +1,29 @@
+# --- .NET ---
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.dbmdl
+
+# --- Node / Frontend ---
+node_modules/
+dist/
+build/
+.npm/
+.vite/
+.env
+.env.*.local
+
+# --- OS / Tools ---
+.DS_Store
+Thumbs.db
+
+# --- Logs / Lockfiles ---
+*.log
+yarn.lock
+package-lock.json
+
+# --- Visual Studio Code ---
+.vscode/
