@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Typography, Box } from "@mui/material";
 import { useAuth } from "../../auth/useAuth";
-const { login } = useAuth();
+import { Box, TextField, Button, Typography, Alert } from "@mui/material";
+import { useState } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const [error, setError] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -15,19 +18,14 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+      const res = await axios.post(
+        "http://localhost:5198/api/auth/login",
         data
       );
-      const { token } = response.data;
-
-      // Store token
-      localStorage.setItem("token", token);
-
-      // Redirect to dashboard (or job list)
+      login(res.data.token);
       navigate("/");
     } catch (err) {
-      alert("Login failed. Please check your credentials.");
+      setError("Invalid email or password.");
     }
   };
 
@@ -36,25 +34,32 @@ export default function Login() {
       <Typography variant="h5" gutterBottom>
         Login
       </Typography>
+
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
-          label="Email"
           fullWidth
+          label="Email"
           margin="normal"
           {...register("email", { required: "Email is required" })}
           error={!!errors.email}
           helperText={errors.email?.message}
         />
         <TextField
+          fullWidth
           label="Password"
           type="password"
-          fullWidth
           margin="normal"
           {...register("password", { required: "Password is required" })}
           error={!!errors.password}
           helperText={errors.password?.message}
         />
-        <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
+        <Button variant="contained" fullWidth type="submit" sx={{ mt: 2 }}>
           Login
         </Button>
       </form>
