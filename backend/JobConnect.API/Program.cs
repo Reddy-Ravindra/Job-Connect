@@ -10,7 +10,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 👇 Connection string from config
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -21,11 +20,22 @@ builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IInterestService, InterestService>();
 
 builder.Services.AddControllers();
-builder.Services.AddAuthentication();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
+// JWT Auth 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -42,8 +52,6 @@ builder.Services.AddAuthentication("Bearer")
         };
     });
 
-
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -52,14 +60,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseCors("AllowFrontend");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
-Console.WriteLine("🚀 API is running... Visit http://localhost:5197/swagger");
+Console.WriteLine("🚀 API is running... Visit http://localhost:5000/swagger");
 
-app.Run(); // 👈 This line was missing
+app.Run();

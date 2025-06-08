@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>jobconnect-api-9c348</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
