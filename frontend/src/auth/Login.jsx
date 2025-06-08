@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Typography, Box } from "@mui/material";
+import { useAuth } from "../../auth/useAuth";
+const { login } = useAuth();
 
 export default function Login() {
   const navigate = useNavigate();
