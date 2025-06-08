@@ -18,7 +18,11 @@ export default function AppNavbar() {
           variant="h6"
           component={Link}
           to="/"
-          sx={{ textDecoration: "none", color: "inherit" }}
+          sx={{
+            textDecoration: "none",
+            color: "inherit",
+            fontWeight: 500,
+          }}
         >
           Job Connect
         </Typography>
@@ -26,19 +30,34 @@ export default function AppNavbar() {
         <Box>
           {user ? (
             <>
-              <Button color="inherit" component={Link} to="/dashboard">
+              <Button
+                color="inherit"
+                sx={{ mx: 0.5 }}
+                component={Link}
+                to="/dashboard"
+              >
                 Dashboard
               </Button>
-              <Button color="inherit" onClick={handleLogout}>
+              <Button color="inherit" sx={{ mx: 0.5 }} onClick={handleLogout}>
                 Logout
               </Button>
             </>
           ) : (
             <>
-              <Button color="inherit" component={Link} to="/login">
+              <Button
+                color="inherit"
+                sx={{ mx: 0.5 }}
+                component={Link}
+                to="/login"
+              >
                 Login
               </Button>
-              <Button color="inherit" component={Link} to="/register">
+              <Button
+                color="inherit"
+                sx={{ mx: 0.5 }}
+                component={Link}
+                to="/register"
+              >
                 Register
               </Button>
             </>

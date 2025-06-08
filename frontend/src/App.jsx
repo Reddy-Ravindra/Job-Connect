@@ -1,6 +1,11 @@
 import AppNavbar from "./components/AppNavbar";
 import Register from "./features/auth/Register";
+import Login from "./features/auth/Login";
 import EditJobForm from "./features/jobs/EditJobForm";
+import JobList from "./features/jobs/JobList";
+import Dashboard from "./pages/Dashboard";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -30,3 +35,5 @@ function App() {
     </Router>
   );
 }
+
+export default App;

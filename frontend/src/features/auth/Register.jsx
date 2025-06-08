@@ -29,7 +29,7 @@ export default function Register() {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(
-        "http://localhost:5198/api/auth/register",
+        "http://localhost:5000/api/auth/register",
         data
       );
       login(res.data.token);
