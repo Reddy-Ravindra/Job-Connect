@@ -21,22 +21,11 @@ builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IInterestService, InterestService>();
 
 builder.Services.AddControllers();
+builder.Services.AddAuthentication();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// ✅ Add CORS policy for frontend
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
-    {
-        policy.WithOrigins("http://localhost:5173") // your frontend
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-});
-
-// ✅ Add JWT auth
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -53,6 +42,8 @@ builder.Services.AddAuthentication("Bearer")
         };
     });
 
+
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -61,18 +52,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
-
 app.UseRouting();
-
-// ✅ Enable CORS before auth
-app.UseCors(MyAllowSpecificOrigins);
-
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
-Console.WriteLine("🚀 API is running... Visit http://localhost:5000/swagger");
+Console.WriteLine("🚀 API is running... Visit http://localhost:5197/swagger");
 
-app.Run();
+app.Run(); // 👈 This line was missing

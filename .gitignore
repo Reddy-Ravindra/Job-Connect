@@ -9,7 +9,6 @@ obj/
 
 # --- Node / Frontend ---
 node_modules/
-frontend/node_modules
 dist/
 build/
 .npm/
