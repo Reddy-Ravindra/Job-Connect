@@ -17,3 +17,4 @@ C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Services\obj\Debu
 C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Services\obj\Debug\net8.0\ref\JobConnect.Services.dll
 C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Services\bin\Debug\net8.0\JobConnect.Services.runtimeconfig.json
 C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Services\obj\Debug\net8.0\JobConnect.Services.genruntimeconfig.cache
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Services\obj\Debug\net8.0\JobConnect.Services.sourcelink.json

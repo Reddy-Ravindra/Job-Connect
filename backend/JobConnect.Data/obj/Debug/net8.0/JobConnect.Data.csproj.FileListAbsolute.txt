@@ -15,3 +15,4 @@ C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Data\obj\Debug\ne
 C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Data\obj\Debug\net8.0\JobConnect.Data.pdb
 C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Data\obj\Debug\net8.0\JobConnect.Data.genruntimeconfig.cache
 C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Data\obj\Debug\net8.0\ref\JobConnect.Data.dll
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Data\obj\Debug\net8.0\JobConnect.Data.sourcelink.json
