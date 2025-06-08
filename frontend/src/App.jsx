@@ -1,3 +1,4 @@
+import React from "react";
 import AppNavbar from "./components/AppNavbar";
 import Register from "./features/auth/Register";
 import Login from "./features/auth/Login";
