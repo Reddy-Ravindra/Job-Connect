@@ -1,13 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./features/auth/Login";
-import Dashboard from "./pages/Dashboard";
-import ProtectedRoute from "./components/ProtectedRoute";
-import JobList from "./features/jobs/JobList";
+import AppNavbar from "./components/AppNavbar";
 
 function App() {
   return (
     <Router>
+      <AppNavbar />
       <Routes>
+        <Route path="/" element={<JobList />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/dashboard"
@@ -17,11 +15,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Login />} />
-        <Route path="/" element={<JobList />} />
       </Routes>
     </Router>
   );
 }
-
-export default App;
