@@ -1,5 +1,4 @@
-import { useAuth } from "../auth/useAuth";
-import { Box, Typography } from "@mui/material";
+import JobForm from "../features/jobs/JobForm";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -7,7 +6,11 @@ export default function Dashboard() {
   return (
     <Box sx={{ p: 4 }}>
       <Typography variant="h4">Welcome, {user?.username}!</Typography>
-      <Typography variant="subtitle1">Your role: {user?.role}</Typography>
+      <Typography variant="subtitle1" gutterBottom>
+        Your role: {user?.role}
+      </Typography>
+
+      {user?.role === "poster" && <JobForm />}
     </Box>
   );
 }
