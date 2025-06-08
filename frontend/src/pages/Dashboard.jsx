@@ -1,4 +1,5 @@
 import JobForm from "../features/jobs/JobForm";
+import MyJobs from "../features/jobs/MyJobs";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -11,6 +12,7 @@ export default function Dashboard() {
       </Typography>
 
       {user?.role === "poster" && <JobForm />}
+      {user?.role === "poster" && <MyJobs />}
     </Box>
   );
 }
