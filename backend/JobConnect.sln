@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobConnect.API", "JobConnec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobConnect.Core", "JobConnect.Core\JobConnect.Core.csproj", "{16CACC63-D501-48AB-8024-D352B0C6E8E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobConnect.Data", "JobConnect.Data\JobConnect.Data.csproj", "{949CA32C-F689-4925-BA05-6A547E4FE7C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobConnect.Services", "JobConnect.Services\JobConnect.Services.csproj", "{54A323A7-F84A-4365-9567-8E3A5AEB5B48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{16CACC63-D501-48AB-8024-D352B0C6E8E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16CACC63-D501-48AB-8024-D352B0C6E8E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16CACC63-D501-48AB-8024-D352B0C6E8E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{949CA32C-F689-4925-BA05-6A547E4FE7C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{949CA32C-F689-4925-BA05-6A547E4FE7C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{949CA32C-F689-4925-BA05-6A547E4FE7C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{949CA32C-F689-4925-BA05-6A547E4FE7C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54A323A7-F84A-4365-9567-8E3A5AEB5B48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54A323A7-F84A-4365-9567-8E3A5AEB5B48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54A323A7-F84A-4365-9567-8E3A5AEB5B48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54A323A7-F84A-4365-9567-8E3A5AEB5B48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
