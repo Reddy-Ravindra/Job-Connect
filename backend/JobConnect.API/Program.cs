@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using JobConnect.Services.Auth;
 using JobConnect.Core.Interfaces;
 using JobConnect.Services.Jobs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJobService, JobService>();
 
 builder.Services.AddControllers();
+builder.Services.AddAuthentication();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -46,7 +51,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-// app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
