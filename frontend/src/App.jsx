@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./features/auth/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import JobList from "./features/jobs/JobList";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           }
         />
         <Route path="*" element={<Login />} />
+        <Route path="/" element={<JobList />} />
       </Routes>
     </Router>
   );
