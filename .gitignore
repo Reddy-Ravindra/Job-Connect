@@ -8,6 +8,7 @@ obj/
 *.dbmdl
 
 # --- Node / Frontend ---
+<<<<<<< HEAD
 /node_modules/
 frontend/node_modules/
 dist/
@@ -19,6 +20,13 @@ build/
 # Frontend environment files
 .env
 .env.*.local
+=======
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.env
+/frontend/.vite/
+/frontend/.npm/
+>>>>>>> feature/frontend-setup
 
 # Lockfiles (root or frontend)
 yarn.lock
@@ -35,6 +43,12 @@ Thumbs.db
 
 # --- Logs ---
 *.log
+<<<<<<< HEAD
+=======
+yarn.lock
+# (Uncomment the next line only if you use yarn exclusively)
+# package-lock.json
+>>>>>>> feature/frontend-setup
 
 # --- VS Code ---
 .vscode/
