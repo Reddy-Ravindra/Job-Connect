@@ -1,0 +1,11 @@
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\bin\Debug\net8.0\JobConnect.Core.deps.json
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\bin\Debug\net8.0\JobConnect.Core.dll
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\bin\Debug\net8.0\JobConnect.Core.pdb
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\obj\Debug\net8.0\JobConnect.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\obj\Debug\net8.0\JobConnect.Core.AssemblyInfoInputs.cache
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\obj\Debug\net8.0\JobConnect.Core.AssemblyInfo.cs
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\obj\Debug\net8.0\JobConnect.Core.csproj.CoreCompileInputs.cache
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\obj\Debug\net8.0\JobConnect.Core.dll
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\obj\Debug\net8.0\refint\JobConnect.Core.dll
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\obj\Debug\net8.0\JobConnect.Core.pdb
+C:\Users\ravin\OneDrive\Desktop\job-connect\backend\JobConnect.Core\obj\Debug\net8.0\ref\JobConnect.Core.dll
