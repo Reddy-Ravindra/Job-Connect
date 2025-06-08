@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\jobconnect.services\\JobConnect.Services.csproj": {}
+    "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\JobConnect.Services\\JobConnect.Services.csproj": {}
   },
   "projects": {
     "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\JobConnect.Core\\JobConnect.Core.csproj": {
@@ -142,6 +142,10 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[9.0.5, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[8.0.3, )"
             }
           },
           "imports": [
@@ -164,14 +168,14 @@
         }
       }
     },
-    "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\jobconnect.services\\JobConnect.Services.csproj": {
+    "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\JobConnect.Services\\JobConnect.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\jobconnect.services\\JobConnect.Services.csproj",
+        "projectUniqueName": "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\JobConnect.Services\\JobConnect.Services.csproj",
         "projectName": "JobConnect.Services",
-        "projectPath": "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\jobconnect.services\\JobConnect.Services.csproj",
+        "projectPath": "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\JobConnect.Services\\JobConnect.Services.csproj",
         "packagesPath": "C:\\Users\\ravin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\jobconnect.services\\obj\\",
+        "outputPath": "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\JobConnect.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

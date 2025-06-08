@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JobConnect.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+552e5591a9b5bc15e5d700a7e84f26ee7c0b28d6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f80f47c97c942216ec14e5a538ea9763949984ba")]
 [assembly: System.Reflection.AssemblyProductAttribute("JobConnect.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JobConnect.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

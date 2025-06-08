@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fcxw8blK1Ks=",
+  "dgSpecHash": "PXNwN3XuMJA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\jobconnect.services\\JobConnect.Services.csproj",
+  "projectFilePath": "C:\\Users\\ravin\\OneDrive\\Desktop\\job-connect\\backend\\JobConnect.Services\\JobConnect.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ravin\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\ravin\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -39,6 +39,8 @@
     "C:\\Users\\ravin\\.nuget\\packages\\microsoft.identitymodel.logging\\8.12.0\\microsoft.identitymodel.logging.8.12.0.nupkg.sha512",
     "C:\\Users\\ravin\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.12.0\\microsoft.identitymodel.tokens.8.12.0.nupkg.sha512",
     "C:\\Users\\ravin\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\ravin\\.nuget\\packages\\mysqlconnector\\2.3.5\\mysqlconnector.2.3.5.nupkg.sha512",
+    "C:\\Users\\ravin\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\8.0.3\\pomelo.entityframeworkcore.mysql.8.0.3.nupkg.sha512",
     "C:\\Users\\ravin\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\ravin\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\ravin\\.nuget\\packages\\system.composition\\6.0.0\\system.composition.6.0.0.nupkg.sha512",
