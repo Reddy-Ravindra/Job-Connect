@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobConnect.API", "JobConnect.API\JobConnect.API.csproj", "{EAEAD7E9-042C-499A-8F71-97D2CF08113D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobConnect.Core", "JobConnect.Core\JobConnect.Core.csproj", "{16CACC63-D501-48AB-8024-D352B0C6E8E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{EAEAD7E9-042C-499A-8F71-97D2CF08113D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAEAD7E9-042C-499A-8F71-97D2CF08113D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAEAD7E9-042C-499A-8F71-97D2CF08113D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16CACC63-D501-48AB-8024-D352B0C6E8E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16CACC63-D501-48AB-8024-D352B0C6E8E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16CACC63-D501-48AB-8024-D352B0C6E8E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16CACC63-D501-48AB-8024-D352B0C6E8E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
