@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\JobConnect.Core\JobConnect.Core.csproj" />
     <ProjectReference Include="..\JobConnect.Services\JobConnect.Services.csproj" />
+    <ProjectReference Include="..\JobConnect.Data\JobConnect.Data.csproj" />
   </ItemGroup>
 
 </Project>
