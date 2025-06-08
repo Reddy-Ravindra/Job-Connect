@@ -2,13 +2,23 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
-import { Box, TextField, Button, Typography, Alert } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Alert,
+  Snackbar,
+} from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import { useState } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
+
   const [error, setError] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const {
     register,
@@ -23,8 +33,9 @@ export default function Login() {
         data
       );
       login(res.data.token);
-      navigate("/");
-    } catch (err) {
+      setSnackbarOpen(true);
+      setTimeout(() => navigate("/dashboard"), 1500);
+    } catch {
       setError("Invalid email or password.");
     }
   };
@@ -59,10 +70,20 @@ export default function Login() {
           error={!!errors.password}
           helperText={errors.password?.message}
         />
-        <Button variant="contained" fullWidth type="submit" sx={{ mt: 2 }}>
+        <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
           Login
         </Button>
       </form>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <MuiAlert severity="success" variant="filled">
+          Login successful!
+        </MuiAlert>
+      </Snackbar>
     </Box>
   );
 }
