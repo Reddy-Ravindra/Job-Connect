@@ -21,7 +21,7 @@ export default function EditJobForm() {
   // Fetch job details
   useEffect(() => {
     axios
-      .get(`http://localhost:5198/api/jobs/${id}`, {
+      .get(`http://localhost:5000/api/jobs/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -33,7 +33,7 @@ export default function EditJobForm() {
 
   const onSubmit = async (data) => {
     try {
-      await axios.put(`http://localhost:5198/api/jobs/${id}`, data, {
+      await axios.put(`http://localhost:5000/api/jobs/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate("/dashboard");

@@ -1,5 +1,7 @@
 import JobForm from "../features/jobs/JobForm";
 import MyJobs from "../features/jobs/MyJobs";
+import { useAuth } from "../auth/useAuth";
+import { Box, Typography } from "@mui/material";
 
 export default function Dashboard() {
   const { user } = useAuth();

@@ -8,7 +8,7 @@ export default function JobList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5198/api/jobs")
+      .get("http://localhost:5000/api/jobs")
       .then((res) => setJobs(res.data))
       .catch(() => setJobs([]));
   }, []);

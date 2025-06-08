@@ -19,7 +19,7 @@ export default function MyJobs() {
 
   const fetchJobs = async () => {
     try {
-      const res = await axios.get("http://localhost:5198/api/jobs/my", {
+      const res = await axios.get("http://localhost:5000/api/jobs/my", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setJobs(res.data);
