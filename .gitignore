@@ -8,22 +8,33 @@ obj/
 *.dbmdl
 
 # --- Node / Frontend ---
-node_modules/
+/node_modules/
+frontend/node_modules/
 dist/
+frontend/dist/
 build/
 .npm/
 .vite/
+
+# Frontend environment files
 .env
 .env.*.local
+
+# Lockfiles (root or frontend)
+yarn.lock
+/package-lock.json
+/frontend/package-lock.json
+
+# Prevent committing root-level node package files
+/package.json
+/frontend/package.json
 
 # --- OS / Tools ---
 .DS_Store
 Thumbs.db
 
-# --- Logs / Lockfiles ---
+# --- Logs ---
 *.log
-yarn.lock
-package-lock.json
 
-# --- Visual Studio Code ---
+# --- VS Code ---
 .vscode/
