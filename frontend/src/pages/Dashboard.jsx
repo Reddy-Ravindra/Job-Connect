@@ -1,5 +1,6 @@
 import JobForm from "../features/jobs/JobForm";
 import MyJobs from "../features/jobs/MyJobs";
+import { useAuth } from "../auth/useAuth";
 
 export default function Dashboard() {
   const { user } = useAuth();
