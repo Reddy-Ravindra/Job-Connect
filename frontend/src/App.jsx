@@ -1,5 +1,6 @@
 import AppNavbar from "./components/AppNavbar";
 import Register from "./features/auth/Register";
+import EditJobForm from "./features/jobs/EditJobForm";
 
 function App() {
   return (
@@ -14,6 +15,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/jobs/edit/:id"
+          element={
+            <ProtectedRoute>
+              <EditJobForm />
             </ProtectedRoute>
           }
         />

@@ -54,7 +54,13 @@ export default function MyJobs() {
             <ListItem>
               <ListItemText primary={job.summary} secondary={job.body} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" color="primary" title="Edit">
+                <IconButton
+                  edge="end"
+                  color="primary"
+                  title="Edit"
+                  component={Link}
+                  to={`/jobs/edit/${job.id}`}
+                >
                   <Edit />
                 </IconButton>
                 <IconButton
