@@ -1,6 +1,9 @@
 import AppNavbar from "./components/AppNavbar";
 import Register from "./features/auth/Register";
+import Login from "./features/auth/Login";
 import EditJobForm from "./features/jobs/EditJobForm";
+import JobList from "./features/jobs/JobList";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
