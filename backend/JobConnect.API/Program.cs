@@ -70,6 +70,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-Console.WriteLine("🚀 API is running... Visit http://localhost:5197/swagger");
+Console.WriteLine("🚀 API is running...");
 
 app.Run();
