@@ -10,7 +10,17 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 👇 Connection string from config
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -42,8 +52,6 @@ builder.Services.AddAuthentication("Bearer")
         };
     });
 
-
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -52,9 +60,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseCors("AllowFrontend"); 
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -62,4 +72,4 @@ app.MapControllers();
 
 Console.WriteLine("🚀 API is running... Visit http://localhost:5197/swagger");
 
-app.Run(); // 👈 This line was missing
+app.Run();
