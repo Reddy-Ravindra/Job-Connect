@@ -5,6 +5,7 @@ using JobConnect.Core.Interfaces;
 using JobConnect.Services.Jobs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using JobConnect.Services.Interests;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJobService, JobService>();
+builder.Services.AddScoped<IInterestService, InterestService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthentication();
