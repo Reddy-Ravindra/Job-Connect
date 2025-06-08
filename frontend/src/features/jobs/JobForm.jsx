@@ -18,7 +18,7 @@ export default function JobForm() {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:5198/api/jobs", data, {
+      await axios.post("http://localhost:5000/api/jobs", data, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSuccess("Job posted successfully.");

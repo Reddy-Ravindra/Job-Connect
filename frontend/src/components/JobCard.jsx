@@ -19,7 +19,7 @@ export default function JobCard({ job }) {
   const handleInterest = async () => {
     try {
       await axios.post(
-        "http://localhost:5198/api/interests",
+        "http://localhost:5000/api/interests",
         {
           jobId: job.id,
         },
