@@ -25,6 +25,15 @@ public class InterestController : ControllerBase
         return success ? Ok(new { message = "Interest registered." }) : BadRequest(new { message = "Already interested or job invalid." });
     }
 
+    [HttpGet("status")]
+    [Authorize(Roles = "viewer")]
+    public async Task<IActionResult> IsInterested(int jobId)
+    {
+        int userId = GetUserId();
+        bool isInterested = await _interestService.IsUserInterestedAsync(jobId, userId);
+        return Ok(new { interested = isInterested });
+    }
+
     [HttpGet]
     [Authorize(Roles = "poster")]
     public async Task<IActionResult> GetInterestedUsers(int jobId)

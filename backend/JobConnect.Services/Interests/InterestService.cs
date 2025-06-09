@@ -39,6 +39,11 @@ public class InterestService : IInterestService
         return true;
     }
 
+    public async Task<bool> IsUserInterestedAsync(int jobId, int userId)
+    {
+        return await _context.Interests.AnyAsync(i => i.JobId == jobId && i.UserId == userId);
+    }
+
     // public async Task<List<InterestDto>> GetInterestedUsersAsync(int jobId, int posterId)
     // {
     //     var job = await _context.Jobs.FirstOrDefaultAsync(j => j.Id == jobId && j.PosterId == posterId);
