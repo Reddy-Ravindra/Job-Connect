@@ -8,7 +8,7 @@ export default function Dashboard() {
 
   return (
     <Box sx={{ p: 4 }}>
-      <Typography variant="h4">Welcome, {user?.username}!</Typography>
+      <Typography variant="h4">Welcome, {user?.username || "User"}!</Typography>
       <Typography variant="subtitle1" gutterBottom>
         Your role: {user?.role}
       </Typography>
