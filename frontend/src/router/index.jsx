@@ -1,6 +1,8 @@
 // router/index.js
 import PostJobPage from "../features/jobs/PostJobPage";
 import RequireAuth from "../auth/RequireAuth";
+import ProtectedRoute from "../auth/ProtectedRoute";
+import Dashboard from "../pages/Dashboard";
 
 const routes = [
   {
@@ -9,6 +11,14 @@ const routes = [
       <RequireAuth allowedRole="poster">
         <PostJobPage />
       </RequireAuth>
+    ),
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
     ),
   },
   // ...other routes

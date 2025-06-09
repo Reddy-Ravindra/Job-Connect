@@ -6,7 +6,8 @@ import EditJobForm from "./features/jobs/EditJobForm";
 import JobList from "./features/jobs/JobList";
 import Dashboard from "./pages/Dashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./components/ProtectedRoute";
+// import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 function App() {
   return (
