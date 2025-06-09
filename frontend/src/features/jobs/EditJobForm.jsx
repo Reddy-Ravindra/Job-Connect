@@ -2,13 +2,25 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
-import { Box, TextField, Button, Typography, Alert } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Alert,
+  CircularProgress,
+  Card,
+  CardContent,
+  Container,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function EditJobForm() {
   const { token } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const {
@@ -18,17 +30,21 @@ export default function EditJobForm() {
     formState: { errors },
   } = useForm();
 
-  // Fetch job details
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/jobs/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
+    const fetchJob = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/jobs/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setValue("summary", res.data.summary);
         setValue("body", res.data.body);
-      })
-      .catch(() => setError("Unable to load job"));
+      } catch {
+        setError("Unable to load job details.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchJob();
   }, [id, setValue, token]);
 
   const onSubmit = async (data) => {
@@ -37,43 +53,62 @@ export default function EditJobForm() {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate("/dashboard");
-    } catch (err) {
-      setError("Update failed.");
+    } catch {
+      setError("Failed to update job.");
     }
   };
 
   return (
-    <Box sx={{ maxWidth: 500, mx: "auto", mt: 4 }}>
-      <Typography variant="h5" gutterBottom>
-        Edit Job
-      </Typography>
-      {error && <Alert severity="error">{error}</Alert>}
+    <Container maxWidth="sm" sx={{ mt: 6 }}>
+      <Card>
+        <CardContent>
+          <Typography variant="h5" gutterBottom>
+            Edit Job
+          </Typography>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          fullWidth
-          label="Job Summary"
-          margin="normal"
-          {...register("summary", { required: "Summary is required" })}
-          error={!!errors.summary}
-          helperText={errors.summary?.message}
-        />
+          {loading && <CircularProgress />}
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
 
-        <TextField
-          fullWidth
-          label="Job Description"
-          multiline
-          rows={4}
-          margin="normal"
-          {...register("body", { required: "Description is required" })}
-          error={!!errors.body}
-          helperText={errors.body?.message}
-        />
+          {!loading && (
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <TextField
+                fullWidth
+                label="Job Summary"
+                variant="outlined"
+                margin="normal"
+                {...register("summary", { required: "Summary is required" })}
+                error={!!errors.summary}
+                helperText={errors.summary?.message}
+              />
 
-        <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
-          Update Job
-        </Button>
-      </form>
-    </Box>
+              <TextField
+                fullWidth
+                label="Job Description"
+                variant="outlined"
+                multiline
+                rows={6}
+                margin="normal"
+                {...register("body", { required: "Description is required" })}
+                error={!!errors.body}
+                helperText={errors.body?.message}
+              />
+
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                sx={{ mt: 3 }}
+              >
+                Update Job
+              </Button>
+            </form>
+          )}
+        </CardContent>
+      </Card>
+    </Container>
   );
 }

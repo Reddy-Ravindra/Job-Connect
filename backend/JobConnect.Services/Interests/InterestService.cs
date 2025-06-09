@@ -39,24 +39,40 @@ public class InterestService : IInterestService
         return true;
     }
 
-    public async Task<List<InterestDto>> GetInterestedUsersAsync(int jobId, int posterId)
-    {
-        var job = await _context.Jobs.FirstOrDefaultAsync(j => j.Id == jobId && j.PosterId == posterId);
-        if (job == null)
-            throw new UnauthorizedAccessException("You are not the owner of this job.");
+    // public async Task<List<InterestDto>> GetInterestedUsersAsync(int jobId, int posterId)
+    // {
+    //     var job = await _context.Jobs.FirstOrDefaultAsync(j => j.Id == jobId && j.PosterId == posterId);
+    //     if (job == null)
+    //         throw new UnauthorizedAccessException("You are not the owner of this job.");
 
-        var interestedUsers = await _context.Interests
+    //     var interestedUsers = await _context.Interests
+    //         .Where(i => i.JobId == jobId)
+    //         .Include(i => i.User)
+    //         .OrderByDescending(i => i.InterestedAt)
+    //         .ToListAsync();
+
+    //     return interestedUsers.Select(i => new InterestDto
+    //     {
+    //         JobId = i.JobId,
+    //         UserId = i.UserId,
+    //         Username = i.User!.Username,
+    //         InterestedAt = i.InterestedAt
+    //     }).ToList();
+    // }
+    public async Task<List<UserDto>> GetInterestedUsersAsync(int jobId, int posterId)
+    {
+        var job = await _context.Jobs.FindAsync(jobId);
+        if (job == null || job.PosterId != posterId)
+            throw new UnauthorizedAccessException("You do not own this job.");
+
+        return await _context.Interests
             .Where(i => i.JobId == jobId)
             .Include(i => i.User)
-            .OrderByDescending(i => i.InterestedAt)
+            .Select(i => new UserDto
+            {
+                Username = i.User.Username,
+                Email = i.User.Email
+            })
             .ToListAsync();
-
-        return interestedUsers.Select(i => new InterestDto
-        {
-            JobId = i.JobId,
-            UserId = i.UserId,
-            Username = i.User!.Username,
-            InterestedAt = i.InterestedAt
-        }).ToList();
     }
 }

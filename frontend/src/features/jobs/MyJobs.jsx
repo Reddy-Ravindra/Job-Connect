@@ -9,13 +9,18 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Divider,
+  CircularProgress,
+  Alert,
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import { useAuth } from "../../auth/useAuth";
+import { Link } from "react-router-dom";
 
 export default function MyJobs() {
   const { token } = useAuth();
   const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchJobs = async () => {
     try {
@@ -24,13 +29,16 @@ export default function MyJobs() {
       });
       setJobs(res.data);
     } catch (err) {
-      console.error("Failed to load jobs");
+      console.error("Failed to load jobs", err);
+      setError("Failed to load your jobs. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5198/api/jobs/${id}`, {
+      await axios.delete(`http://localhost:5000/api/jobs/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setJobs(jobs.filter((job) => job.id !== id));
@@ -43,41 +51,44 @@ export default function MyJobs() {
     fetchJobs();
   }, []);
 
+  if (loading) return <CircularProgress />;
+  if (error) return <Alert severity="error">{error}</Alert>;
+  if (!jobs.length) return <Typography>No jobs found.</Typography>;
+
   return (
-    <Box sx={{ mt: 4 }}>
-      <Typography variant="h6" gutterBottom>
-        My Posted Jobs
-      </Typography>
-      <List>
-        {jobs.map((job) => (
-          <div key={job.id}>
-            <ListItem>
-              <ListItemText primary={job.summary} secondary={job.body} />
-              <ListItemSecondaryAction>
-                <IconButton
-                  edge="end"
-                  color="primary"
-                  title="Edit"
-                  component={Link}
-                  to={`/jobs/edit/${job.id}`}
-                >
-                  <Edit />
-                </IconButton>
-                <IconButton
-                  edge="end"
-                  color="error"
-                  title="Delete"
-                  onClick={() => handleDelete(job.id)}
-                  sx={{ ml: 1 }}
-                >
-                  <Delete />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-          </div>
-        ))}
-      </List>
-    </Box>
+    <List>
+      {jobs.map((job) => (
+        <div key={job.id}>
+          <ListItem alignItems="flex-start">
+            <ListItemText
+              primary={job.summary}
+              secondary={job.body}
+              sx={{ maxWidth: "80%" }}
+            />
+            <ListItemSecondaryAction>
+              <IconButton
+                edge="end"
+                color="primary"
+                title="Edit"
+                component={Link}
+                to={`/jobs/edit/${job.id}`}
+              >
+                <Edit />
+              </IconButton>
+              <IconButton
+                edge="end"
+                color="error"
+                title="Delete"
+                onClick={() => handleDelete(job.id)}
+                sx={{ ml: 1 }}
+              >
+                <Delete />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+          <Divider />
+        </div>
+      ))}
+    </List>
   );
 }

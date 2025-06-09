@@ -6,7 +6,7 @@ using System.Security.Claims;
 namespace JobConnect.API.Controllers;
 
 [ApiController]
-[Route("api/jobs/{jobId}/[controller]")]
+[Route("api/jobs/{jobId}/interest")]
 public class InterestController : ControllerBase
 {
     private readonly IInterestService _interestService;
@@ -16,7 +16,6 @@ public class InterestController : ControllerBase
         _interestService = interestService;
     }
 
-    // Viewer marks interest
     [HttpPost]
     [Authorize(Roles = "viewer")]
     public async Task<IActionResult> MarkInterest(int jobId)
@@ -26,7 +25,6 @@ public class InterestController : ControllerBase
         return success ? Ok(new { message = "Interest registered." }) : BadRequest(new { message = "Already interested or job invalid." });
     }
 
-    // Poster sees who is interested in their job
     [HttpGet]
     [Authorize(Roles = "poster")]
     public async Task<IActionResult> GetInterestedUsers(int jobId)
