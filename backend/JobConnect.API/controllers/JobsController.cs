@@ -49,6 +49,15 @@ public class JobsController : ControllerBase
         return CreatedAtAction(nameof(GetJob), new { id = job.Id }, job);
     }
 
+    [HttpGet("my")]
+    [Authorize(Roles = "poster")]
+    public async Task<IActionResult> GetMyJobs()
+    {
+       var posterId = GetUserId();
+       var jobs = await _jobService.GetJobsByPosterAsync(posterId);
+       return Ok(jobs);
+    }
+
     [HttpPut("{id}")]
     [Authorize(Roles = "poster")]
     public async Task<IActionResult> UpdateJob(int id, [FromBody] UpdateJobDto dto)

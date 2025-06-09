@@ -9,4 +9,6 @@ public interface IJobService
     Task<JobDto> GetJobByIdAsync(int id);
     Task<bool> UpdateJobAsync(int id, int posterId, UpdateJobDto dto);
     Task<bool> DeleteJobAsync(int id, int posterId);
+
+    Task<List<JobDto>> GetJobsByPosterAsync(int posterId);
 }
