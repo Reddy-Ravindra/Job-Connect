@@ -7,18 +7,24 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const decodeToken = (jwtToken) => {
+    try {
+      const payload = JSON.parse(atob(jwtToken.split(".")[1]));
+      return {
+        username: payload.name,
+        role: payload.role,
+        id: payload.nameid,
+      };
+    } catch (err) {
+      console.error("Failed to decode token:", err);
+      return null;
+    }
+  };
+
   useEffect(() => {
     if (token) {
-      try {
-        const payload = JSON.parse(atob(token.split(".")[1]));
-        setUser({
-          username: payload.name,
-          role: payload.role,
-          id: payload.nameid,
-        });
-      } catch {
-        setUser(null);
-      }
+      const decodedUser = decodeToken(token);
+      setUser(decodedUser);
     } else {
       setUser(null);
     }
@@ -28,6 +34,8 @@ export const AuthProvider = ({ children }) => {
   const login = (jwtToken) => {
     localStorage.setItem("token", jwtToken);
     setToken(jwtToken);
+    const decodedUser = decodeToken(jwtToken);
+    setUser(decodedUser);
   };
 
   const logout = () => {

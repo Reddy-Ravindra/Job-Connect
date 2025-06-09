@@ -34,8 +34,8 @@ builder.Services.AddCors(options =>
 });
 
 // JWT Auth
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
     {
         var key = builder.Configuration["Jwt:Key"];
         options.TokenValidationParameters = new TokenValidationParameters
