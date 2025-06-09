@@ -25,7 +25,7 @@ public class AuthService : IAuthService
     public async Task<AuthResultDto> RegisterAsync(RegisterDto dto)
     {
         if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
-            throw new Exception("Email already in use.");
+            throw new Exception("Email already in use...");
 
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
@@ -47,7 +47,7 @@ public class AuthService : IAuthService
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
         if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
-            throw new Exception("Invalid email or password.");
+            throw new Exception("Invalid email or password...");
 
         return GenerateJwt(user);
     }

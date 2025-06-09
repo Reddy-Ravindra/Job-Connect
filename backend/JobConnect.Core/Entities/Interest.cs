@@ -10,7 +10,7 @@ public class Interest
 
     public DateTime InterestedAt { get; set; } = DateTime.UtcNow;
 
-    // Navigation
+   
     public User? User { get; set; }
 
     public Job? Job { get; set; }

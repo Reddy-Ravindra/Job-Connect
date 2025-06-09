@@ -22,7 +22,7 @@ public class InterestController : ControllerBase
     {
         int userId = GetUserId();
         var success = await _interestService.MarkInterestAsync(jobId, userId);
-        return success ? Ok(new { message = "Interest registered." }) : BadRequest(new { message = "Already interested or job invalid." });
+        return success ? Ok(new { message = "Interest registered." }) : BadRequest(new { message = "Already interested or job invalid..." });
     }
 
     [HttpDelete]
@@ -31,7 +31,7 @@ public class InterestController : ControllerBase
     {
         int userId = GetUserId();
         var removed = await _interestService.RemoveInterestAsync(jobId, userId);
-        return removed ? Ok(new { message = "Interest removed." }) : NotFound(new { message = "Not marked as interested." });
+        return removed ? Ok(new { message = "Interest removed." }) : NotFound(new { message = "Not at all interested." });
     }
 
     [HttpGet("status")]
@@ -63,7 +63,7 @@ public class InterestController : ControllerBase
     {
         var claim = User.FindFirst(ClaimTypes.NameIdentifier);
         if (claim == null)
-            throw new UnauthorizedAccessException("User ID not found in token.");
+            throw new UnauthorizedAccessException("User ID not found with token.");
         return int.Parse(claim.Value);
     }
 }

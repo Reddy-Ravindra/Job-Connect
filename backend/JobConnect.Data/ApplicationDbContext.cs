@@ -16,12 +16,10 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Unique constraint for interest (1 user can’t mark interest twice)
         modelBuilder.Entity<Interest>()
             .HasIndex(i => new { i.UserId, i.JobId })
             .IsUnique();
 
-        // Relationships
         modelBuilder.Entity<Job>()
             .HasOne(j => j.Poster)
             .WithMany(u => u.PostedJobs)

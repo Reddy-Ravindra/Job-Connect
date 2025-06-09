@@ -48,43 +48,23 @@ public class InterestService : IInterestService
     {
         var interest = await _context.Interests
             .FirstOrDefaultAsync(i => i.JobId == jobId && i.UserId == userId);
-    
+
         if (interest == null) return false;
-    
+
         _context.Interests.Remove(interest);
         await _context.SaveChangesAsync();
         return true;
     }
-
-    // public async Task<List<InterestDto>> GetInterestedUsersAsync(int jobId, int posterId)
-    // {
-    //     var job = await _context.Jobs.FirstOrDefaultAsync(j => j.Id == jobId && j.PosterId == posterId);
-    //     if (job == null)
-    //         throw new UnauthorizedAccessException("You are not the owner of this job.");
-
-    //     var interestedUsers = await _context.Interests
-    //         .Where(i => i.JobId == jobId)
-    //         .Include(i => i.User)
-    //         .OrderByDescending(i => i.InterestedAt)
-    //         .ToListAsync();
-
-    //     return interestedUsers.Select(i => new InterestDto
-    //     {
-    //         JobId = i.JobId,
-    //         UserId = i.UserId,
-    //         Username = i.User!.Username,
-    //         InterestedAt = i.InterestedAt
-    //     }).ToList();
-    // }
+    
     public async Task<List<InterestDto>> GetInterestedUsersAsync(int jobId, int posterId)
     {
         var job = await _context.Jobs
-            .Include(j => j.InterestedUsers) // ✅ Must match navigation property
+            .Include(j => j.InterestedUsers) 
             .ThenInclude(i => i.User)
             .FirstOrDefaultAsync(j => j.Id == jobId);
     
         if (job == null || job.PosterId != posterId)
-            throw new UnauthorizedAccessException("Not your job.");
+            throw new UnauthorizedAccessException("Not your job to do...");
     
         return job.InterestedUsers
             .Select(i => new InterestDto

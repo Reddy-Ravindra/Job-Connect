@@ -88,7 +88,7 @@ public class JobsController : ControllerBase
     private int GetUserId()
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-        if (userIdClaim == null) throw new UnauthorizedAccessException("User not authenticated.");
+        if (userIdClaim == null) throw new UnauthorizedAccessException("User not Authenticated...");
         return int.Parse(userIdClaim.Value);
     }
 }
