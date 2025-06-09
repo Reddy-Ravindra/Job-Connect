@@ -40,7 +40,7 @@ public class JobService : IJobService
             .Where(j => j.PosterId == posterId && j.IsActive && j.PostedDate > twoMonthsAgo)
             .OrderByDescending(j => j.PostedDate)
             .ToListAsync();
-    
+
         return jobs.Select(j => new JobDto
         {
             Id = j.Id,
@@ -113,5 +113,37 @@ public class JobService : IJobService
     {
         var user = await _context.Users.FindAsync(posterId);
         return user?.Username ?? "Unknown";
+    }
+
+    public async Task<object> GetPagedJobsAsync(int page, int pageSize)
+    {
+        var twoMonthsAgo = DateTime.UtcNow.AddMonths(-2);
+        var query = _context.Jobs
+            .Include(j => j.Poster)
+            .Where(j => j.IsActive && j.PostedDate > twoMonthsAgo)
+            .OrderByDescending(j => j.PostedDate);
+    
+        var totalItems = await query.CountAsync();
+        var jobs = await query
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+    
+        var jobDtos = jobs.Select(j => new JobDto
+        {
+            Id = j.Id,
+            Summary = j.Summary,
+            Body = j.Body,
+            PostedDate = j.PostedDate,
+            IsActive = j.IsActive,
+            PosterUsername = j.Poster?.Username ?? "Unknown"
+        }).ToList();
+    
+        return new
+        {
+            items = jobDtos,
+            totalItems,
+            totalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
+        };
     }
 }

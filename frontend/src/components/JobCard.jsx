@@ -7,36 +7,15 @@ import {
   Typography,
   IconButton,
   Tooltip,
+  Box,
 } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 export default function JobCard({ job }) {
   const { user, token, loading } = useAuth();
-  console.log("User:", user);
-  console.log("Token:", token);
   const [interested, setInterested] = useState(false);
 
   const isViewer = user?.role === "viewer";
-
-  // useEffect(() => {
-  //   const checkInterest = async () => {
-  //     try {
-  //       const res = await axios.get(
-  //         `http://localhost:5000/api/jobs/${job.id}/interest/status`,
-  //         {
-  //           headers: { Authorization: `Bearer ${token}` },
-  //         }
-  //       );
-  //       setInterested(res.data.interested);
-  //     } catch (err) {
-  //       console.error("Error checking interest status", err);
-  //     }
-  //   };
-
-  //   if (isViewer) {
-  //     checkInterest();
-  //   }
-  // }, [job.id, token, isViewer]);
 
   useEffect(() => {
     const checkInterest = async () => {
@@ -54,15 +33,14 @@ export default function JobCard({ job }) {
       }
     };
 
-    if (user?.role === "viewer") {
+    if (isViewer) {
       checkInterest();
     }
-  }, [job.id, token, user, loading]);
+  }, [job.id, token, loading, isViewer]);
 
   const toggleInterest = async () => {
     try {
       if (!interested) {
-        console.log("token: ", token);
         await axios.post(
           `http://localhost:5000/api/jobs/${job.id}/interest`,
           {},
@@ -86,22 +64,41 @@ export default function JobCard({ job }) {
   };
 
   return (
-    <Card variant="outlined" sx={{ height: "100%" }}>
+    <Card
+      elevation={3}
+      sx={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        p: 2,
+        borderRadius: 2,
+        boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+      }}
+    >
       <CardContent>
-        <Typography variant="h6">{job.summary}</Typography>
-        <Typography variant="body2" sx={{ mt: 1 }}>
+        <Typography variant="h6" fontWeight="bold" gutterBottom noWrap>
+          {job.summary}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ mb: 2, maxHeight: 90, overflow: "hidden" }}
+        >
           {job.body}
         </Typography>
         <Typography
           variant="caption"
           color="text.secondary"
-          sx={{ display: "block", mt: 2 }}
+          sx={{ display: "block" }}
         >
-          Posted by {job.posterUsername} on{" "}
+          Posted by <strong>{job.posterUsername}</strong> on{" "}
           {new Date(job.postedDate).toLocaleDateString()}
         </Typography>
+      </CardContent>
 
-        {isViewer && (
+      {isViewer && (
+        <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 1 }}>
           <Tooltip
             title={interested ? "Remove Interest" : "Mark as Interested"}
           >
@@ -109,8 +106,8 @@ export default function JobCard({ job }) {
               {interested ? <Favorite color="error" /> : <FavoriteBorder />}
             </IconButton>
           </Tooltip>
-        )}
-      </CardContent>
+        </Box>
+      )}
     </Card>
   );
 }

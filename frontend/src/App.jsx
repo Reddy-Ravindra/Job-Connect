@@ -1,22 +1,23 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppNavbar from "./components/AppNavbar";
+
+import JobList from "./features/jobs/JobList";
 import Register from "./features/auth/Register";
 import Login from "./features/auth/Login";
-import EditJobForm from "./features/jobs/EditJobForm";
-import JobList from "./features/jobs/JobList";
 import Dashboard from "./pages/Dashboard";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import ProtectedRoute from "./components/ProtectedRoute";
+import EditJobForm from "./features/jobs/EditJobForm";
 import ProtectedRoute from "./auth/ProtectedRoute";
 
 function App() {
   return (
     <Router>
       <AppNavbar />
+
       <Routes>
         <Route path="/" element={<JobList />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         <Route
           path="/dashboard"
           element={

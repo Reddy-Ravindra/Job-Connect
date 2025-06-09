@@ -75,6 +75,14 @@ public class JobsController : ControllerBase
         var deleted = await _jobService.DeleteJobAsync(id, userId);
         return deleted ? NoContent() : Forbid();
     }
+
+    [HttpGet("paged")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetPagedJobs([FromQuery] int page = 1, [FromQuery] int pageSize = 6)
+    {
+        var result = await _jobService.GetPagedJobsAsync(page, pageSize);
+        return Ok(result);
+    }
     
 
     private int GetUserId()

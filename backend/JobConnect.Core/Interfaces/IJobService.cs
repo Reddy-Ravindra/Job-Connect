@@ -11,4 +11,5 @@ public interface IJobService
     Task<bool> DeleteJobAsync(int id, int posterId);
 
     Task<List<JobDto>> GetJobsByPosterAsync(int posterId);
+    Task<object> GetPagedJobsAsync(int page, int pageSize);
 }
