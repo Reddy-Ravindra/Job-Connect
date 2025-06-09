@@ -11,13 +11,36 @@ import {
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 export default function JobCard({ job }) {
-  const { user, token } = useAuth();
+  const { user, token, loading } = useAuth();
+  console.log("User:", user);
+  console.log("Token:", token);
   const [interested, setInterested] = useState(false);
 
   const isViewer = user?.role === "viewer";
 
+  // useEffect(() => {
+  //   const checkInterest = async () => {
+  //     try {
+  //       const res = await axios.get(
+  //         `http://localhost:5000/api/jobs/${job.id}/interest/status`,
+  //         {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }
+  //       );
+  //       setInterested(res.data.interested);
+  //     } catch (err) {
+  //       console.error("Error checking interest status", err);
+  //     }
+  //   };
+
+  //   if (isViewer) {
+  //     checkInterest();
+  //   }
+  // }, [job.id, token, isViewer]);
+
   useEffect(() => {
     const checkInterest = async () => {
+      if (!token || loading) return;
       try {
         const res = await axios.get(
           `http://localhost:5000/api/jobs/${job.id}/interest/status`,
@@ -31,25 +54,34 @@ export default function JobCard({ job }) {
       }
     };
 
-    if (isViewer) {
+    if (user?.role === "viewer") {
       checkInterest();
     }
-  }, [job.id, token, isViewer]);
+  }, [job.id, token, user, loading]);
 
-  const handleInterest = async () => {
+  const toggleInterest = async () => {
     try {
-      await axios.post(
-        `http://localhost:5000/api/jobs/${job.id}/interest`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setInterested(true);
+      if (!interested) {
+        console.log("token: ", token);
+        await axios.post(
+          `http://localhost:5000/api/jobs/${job.id}/interest`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setInterested(true);
+      } else {
+        await axios.delete(
+          `http://localhost:5000/api/jobs/${job.id}/interest`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setInterested(false);
+      }
     } catch (err) {
-      alert("You’ve already shown interest or you're unauthorized.");
+      console.error("Error toggling interest", err);
     }
   };
 
@@ -70,8 +102,10 @@ export default function JobCard({ job }) {
         </Typography>
 
         {isViewer && (
-          <Tooltip title={interested ? "Interest Sent" : "I'm Interested"}>
-            <IconButton onClick={handleInterest} disabled={interested}>
+          <Tooltip
+            title={interested ? "Remove Interest" : "Mark as Interested"}
+          >
+            <IconButton onClick={toggleInterest}>
               {interested ? <Favorite color="error" /> : <FavoriteBorder />}
             </IconButton>
           </Tooltip>

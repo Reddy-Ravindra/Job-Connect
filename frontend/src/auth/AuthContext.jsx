@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // 👈 new
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (token) {
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     } else {
       setUser(null);
     }
-    setLoading(false); // 👈 complete init
+    setLoading(false);
   }, [token]);
 
   const login = (jwtToken) => {
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, token, login, logout, loading }}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

@@ -44,6 +44,18 @@ public class InterestService : IInterestService
         return await _context.Interests.AnyAsync(i => i.JobId == jobId && i.UserId == userId);
     }
 
+    public async Task<bool> RemoveInterestAsync(int jobId, int userId)
+    {
+        var interest = await _context.Interests
+            .FirstOrDefaultAsync(i => i.JobId == jobId && i.UserId == userId);
+    
+        if (interest == null) return false;
+    
+        _context.Interests.Remove(interest);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
     // public async Task<List<InterestDto>> GetInterestedUsersAsync(int jobId, int posterId)
     // {
     //     var job = await _context.Jobs.FirstOrDefaultAsync(j => j.Id == jobId && j.PosterId == posterId);
@@ -64,20 +76,26 @@ public class InterestService : IInterestService
     //         InterestedAt = i.InterestedAt
     //     }).ToList();
     // }
-    public async Task<List<UserDto>> GetInterestedUsersAsync(int jobId, int posterId)
+    public async Task<List<InterestDto>> GetInterestedUsersAsync(int jobId, int posterId)
     {
-        var job = await _context.Jobs.FindAsync(jobId);
+        var job = await _context.Jobs
+            .Include(j => j.InterestedUsers) // ✅ Must match navigation property
+            .ThenInclude(i => i.User)
+            .FirstOrDefaultAsync(j => j.Id == jobId);
+    
         if (job == null || job.PosterId != posterId)
-            throw new UnauthorizedAccessException("You do not own this job.");
-
-        return await _context.Interests
-            .Where(i => i.JobId == jobId)
-            .Include(i => i.User)
-            .Select(i => new UserDto
+            throw new UnauthorizedAccessException("Not your job.");
+    
+        return job.InterestedUsers
+            .Select(i => new InterestDto
             {
-                Username = i.User.Username,
-                Email = i.User.Email
+                UserId = i.UserId,
+                // Username = i.User.Username,
+                // Email = i.User.Email
+                Username = i.User?.Username ?? "Unknown",
+                Email = i.User?.Email ?? "unknown@example.com"
             })
-            .ToListAsync();
+            .ToList();
     }
+
 }

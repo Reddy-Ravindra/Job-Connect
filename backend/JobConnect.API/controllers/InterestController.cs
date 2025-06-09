@@ -25,6 +25,15 @@ public class InterestController : ControllerBase
         return success ? Ok(new { message = "Interest registered." }) : BadRequest(new { message = "Already interested or job invalid." });
     }
 
+    [HttpDelete]
+    [Authorize(Roles = "viewer")]
+    public async Task<IActionResult> RemoveInterest(int jobId)
+    {
+        int userId = GetUserId();
+        var removed = await _interestService.RemoveInterestAsync(jobId, userId);
+        return removed ? Ok(new { message = "Interest removed." }) : NotFound(new { message = "Not marked as interested." });
+    }
+
     [HttpGet("status")]
     [Authorize(Roles = "viewer")]
     public async Task<IActionResult> IsInterested(int jobId)
