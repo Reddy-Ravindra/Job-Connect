@@ -20,7 +20,7 @@ export default function Dashboard() {
           <Typography variant="h4" gutterBottom>
             Welcome, {user?.username}!
           </Typography>
-          <Typography variant="subtitle1">Your role: {user?.role}</Typography>
+          <Typography variant="subtitle1">Role: {user?.role}</Typography>
         </CardContent>
       </Card>
 

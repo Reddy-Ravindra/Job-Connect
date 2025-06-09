@@ -16,7 +16,7 @@ export default function InterestedUsers({ jobId }) {
       .catch(() => setUsers([]));
   }, [jobId]);
 
-  if (!users.length) return <Typography>No interests yet.</Typography>;
+  if (!users.length) return <Typography>No interests yet...</Typography>;
 
   return (
     <List>

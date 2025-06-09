@@ -51,9 +51,9 @@ export default function JobList() {
                 key={job.id}
                 sx={{
                   width: {
-                    xs: "100%", // full width on small screens
-                    sm: "47%", // two per row on small-medium
-                    md: "30%", // three per row on desktop+
+                    xs: "100%", 
+                    sm: "47%", 
+                    md: "30%", 
                   },
                   minHeight: "230px",
                 }}

@@ -1,4 +1,3 @@
-// router/index.js
 import PostJobPage from "../features/jobs/PostJobPage";
 import RequireAuth from "../auth/RequireAuth";
 import ProtectedRoute from "../auth/ProtectedRoute";
@@ -21,7 +20,6 @@ const routes = [
       </ProtectedRoute>
     ),
   },
-  // ...other routes
 ];
 
 export default routes;
