@@ -5,18 +5,24 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // 👈 new
 
   useEffect(() => {
     if (token) {
-      const payload = JSON.parse(atob(token.split(".")[1]));
-      setUser({
-        username: payload.name,
-        role: payload.role,
-        id: payload.nameid,
-      });
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        setUser({
+          username: payload.name,
+          role: payload.role,
+          id: payload.nameid,
+        });
+      } catch {
+        setUser(null);
+      }
     } else {
       setUser(null);
     }
+    setLoading(false); // 👈 complete init
   }, [token]);
 
   const login = (jwtToken) => {
@@ -31,8 +37,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
-      {children}
+    <AuthContext.Provider value={{ user, token, login, logout, loading }}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

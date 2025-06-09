@@ -33,6 +33,7 @@ export default function Register() {
         data
       );
       login(res.data.token);
+      console.log("Registered JWT Payload:", res.data.token);
       navigate("/dashboard");
     } catch (err) {
       setError("Registration failed. Email may already be in use.");
