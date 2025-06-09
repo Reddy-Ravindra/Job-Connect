@@ -1,20 +1,15 @@
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
 
 export default function AppNavbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
-
-  // ❌ Hide navbar on login and register routes
-  const hideOnRoutes = ["/login", "/register"];
-  if (hideOnRoutes.includes(location.pathname)) return null;
 
   return (
     <AppBar position="static">
