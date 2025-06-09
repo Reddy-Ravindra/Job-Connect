@@ -32,6 +32,23 @@ public class JobService : IJobService
         return MapToDto(job, await GetPosterUsername(posterId));
     }
 
+    public async Task<List<JobDto>> GetJobsByPosterAsync(int posterId)
+    {
+        return await _context.Jobs
+            .Where(j => j.PosterId == posterId && j.IsActive && j.PostedDate > DateTime.UtcNow.AddMonths(-2))
+            .OrderByDescending(j => j.PostedDate)
+            .Select(j => new JobDto
+            {
+                Id = j.Id,
+                Summary = j.Summary,
+                Body = j.Body,
+                PostedDate = j.PostedDate,
+                IsActive = j.IsActive,
+                PosterUsername = j.Poster.Username
+            })
+            .ToListAsync();
+    }
+
     public async Task<List<JobDto>> GetAllActiveJobsAsync()
     {
         var twoMonthsAgo = DateTime.UtcNow.AddMonths(-2);
