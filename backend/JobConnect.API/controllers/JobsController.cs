@@ -66,6 +66,7 @@ public class JobsController : ControllerBase
         var deleted = await _jobService.DeleteJobAsync(id, userId);
         return deleted ? NoContent() : Forbid();
     }
+    
 
     private int GetUserId()
     {

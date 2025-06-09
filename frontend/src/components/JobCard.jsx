@@ -1,4 +1,3 @@
-// import { Card, CardContent, Typography } from "@mui/material";
 import { useAuth } from "../auth/useAuth";
 import axios from "axios";
 import { useState } from "react";
@@ -11,7 +10,6 @@ import {
 } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
-
 export default function JobCard({ job }) {
   const { user, token } = useAuth();
   const [interested, setInterested] = useState(false);
@@ -19,10 +17,8 @@ export default function JobCard({ job }) {
   const handleInterest = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/interests",
-        {
-          jobId: job.id,
-        },
+        `http://localhost:5000/api/jobs/${job.id}/interest`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -52,7 +48,6 @@ export default function JobCard({ job }) {
           Posted by {job.posterUsername} on{" "}
           {new Date(job.postedDate).toLocaleDateString()}
         </Typography>
-
         {isViewer && (
           <Tooltip title={interested ? "Interest Sent" : "I'm Interested"}>
             <IconButton onClick={handleInterest} disabled={interested}>

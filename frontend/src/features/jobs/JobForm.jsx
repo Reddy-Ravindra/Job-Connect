@@ -3,11 +3,13 @@ import axios from "axios";
 import { useAuth } from "../../auth/useAuth";
 import { TextField, Button, Box, Typography, Alert } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function JobForm() {
   const { token, user } = useAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -24,6 +26,7 @@ export default function JobForm() {
       setSuccess("Job posted successfully.");
       reset();
       setError(null);
+      setTimeout(() => navigate("/dashboard"), 2000);
     } catch (err) {
       setError("Something went wrong. Make sure you are a poster.");
       setSuccess(null);
@@ -64,7 +67,6 @@ export default function JobForm() {
           error={!!errors.summary}
           helperText={errors.summary?.message}
         />
-
         <TextField
           fullWidth
           label="Job Description"
@@ -75,7 +77,6 @@ export default function JobForm() {
           error={!!errors.body}
           helperText={errors.body?.message}
         />
-
         <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
           Submit
         </Button>
