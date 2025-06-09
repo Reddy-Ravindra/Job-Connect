@@ -12,7 +12,7 @@ export default function AppNavbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ mb: 2 }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
           variant="h6"
@@ -27,7 +27,13 @@ export default function AppNavbar() {
           Job Connect
         </Typography>
 
-        <Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          {user && (
+            <Typography variant="body1" sx={{ mx: 2, fontWeight: 300 }}>
+              Welcome, <strong>{user.username}</strong>
+            </Typography>
+          )}
+
           {user ? (
             <>
               <Button
