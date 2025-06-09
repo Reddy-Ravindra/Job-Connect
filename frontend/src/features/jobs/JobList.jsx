@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  Grid,
-  Typography,
-  Box,
-  Pagination,
-  Card,
-  CardContent,
-} from "@mui/material";
+import { Typography, Box, Pagination } from "@mui/material";
 import JobCard from "../../components/JobCard";
 
 export default function JobList() {
@@ -23,19 +16,15 @@ export default function JobList() {
         const res = await axios.get(`http://localhost:5000/api/jobs/paged`, {
           params: { page, pageSize },
         });
-      
-        console.log("Response:", res.data);
-      
-        setJobs(res.data.items ?? []); 
-        setTotalPages(res.data.totalPages ?? 1); 
+        setJobs(res.data.items);
+        setTotalPages(res.data.totalPages);
       } catch (err) {
         console.error("Failed to fetch jobs", err);
       }
     };
-  
+
     fetchJobs();
   }, [page]);
-
 
   return (
     <Box sx={{ px: 4, py: 3 }}>
@@ -49,13 +38,30 @@ export default function JobList() {
         </Typography>
       ) : (
         <>
-          <Grid container spacing={3}>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 3,
+              justifyContent: "center",
+            }}
+          >
             {jobs.map((job) => (
-              <Grid item xs={12} sm={6} md={4} key={job.id}>
+              <Box
+                key={job.id}
+                sx={{
+                  width: {
+                    xs: "100%", // full width on small screens
+                    sm: "47%", // two per row on small-medium
+                    md: "30%", // three per row on desktop+
+                  },
+                  minHeight: "230px",
+                }}
+              >
                 <JobCard job={job} />
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
 
           <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
             <Pagination
